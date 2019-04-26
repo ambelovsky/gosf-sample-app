@@ -77,7 +77,7 @@
 
 		<h3>Test</h3>
 		Echo: <input type="text" id="test_echo" /><br />
-		<input type="button" value="Echo" onClick="messageId++; socket.emit('test.echo', {
+		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
 			messageId: messageId.toString(),
 			message: document.getElementById('test_echo').value
     });" />
@@ -104,7 +104,8 @@
 
 		socket.on('connect', function (response) {
 			console.log('connected');
-			//for(var i = 1; i < 10000; i++) {
+			var i = 1;
+			//for(i = 1; i < 10000; i++) {
 				socket.emit('auth.register', {
 					id: i,
 					data: {
@@ -146,7 +147,7 @@
 			}
 		});
 
-		socket.on('test.echo', function(response) {
+		socket.on('util.echo', function(response) {
 			log(response);
 		});
 	</script>
