@@ -1,19 +1,20 @@
 package main
 
-import f "github.com/ambelovsky/gosf"
+import (
+	f "github.com/ambelovsky/gosf"
+)
 
 func init() {
 	RegisterPlugins() // Register plugins
 	RegisterRoutes()  // Configure endpoint request handlers
+
+	// Load Config Files
+	f.LoadConfig("server", "server.json")
 }
 
 func main() {
-	config := map[string]interface{}{
-		"port": 9999,
-		"path": "/"}
-
 	// Start the server
-	f.Startup(config)
+	f.Startup(f.Config["server"].(map[string]interface{}))
 
 	// Load Plugin App Methods
 	LoadPluginMethods()
