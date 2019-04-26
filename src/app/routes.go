@@ -1,6 +1,6 @@
 package main
 
-import f "gosf"
+import f "github.com/ambelovsky/gosf"
 
 func RegisterRoutes() {
 	auth := new(Auth)

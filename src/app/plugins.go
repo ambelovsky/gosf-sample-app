@@ -1,8 +1,8 @@
 package main
 
 import (
-	f "gosf"
-	pluginMessageCounter "gosf-message-counter"
+	f "github.com/ambelovsky/gosf"
+	pluginMessageCounter "github.com/ambelovsky/gosf-message-counter"
 )
 
 // PluginMessageCounter is the message counter GOSF plugin method accessor
