@@ -1,0 +1,152 @@
+
+<html>
+<head>
+	<style>
+		#LogData {
+			font-family: 'courier new';
+			font-size: 9pt;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+	<script>
+		function $_GET(q,s) {
+			if(window.location.search == '') return undefined;
+			s = s ? s : window.location.search;
+			var re = new RegExp('&'+q+'(?:=([^&]*))?(?=&|$)','i');
+			return (s=s.replace(/^\?/,'&').match(re)) ? (typeof s[1] == 'undefined' ? '' : decodeURIComponent(s[1])) : undefined;
+		}
+
+		var messageId = 0;
+
+		var socketUri = 'ws://localhost:9999';
+
+		var callCount = 0;
+		var socket;
+
+		function log(response) {
+			console.log(response);
+			errors.innerHTML = 'No Errors';
+			if(response.status && response.status == 'failure') errors.innerHTML = response.error;
+		}
+
+		function submitLogin() {
+			var data = {
+				username: document.getElementById('api_username').value,
+				password: document.getElementById('api_passcode').value
+			};
+			socket.emit('auth.login', data);
+			return false;
+		};
+	</script>
+</head>
+<body>
+
+	<div id="ControlPanel" style="float: left; width: 50%;">
+		<div id="ConnectionStatus">
+			Not Connected
+		</div>
+		<br />
+		<div id="Errors">
+			No Errors
+		</div>
+		<br />
+
+		<h3>Authenticate</h3>
+
+		<div style="clear: both; height: 80px;">
+			<form name="loginForm" onsubmit="return submitLogin()" method="post">
+				<div style="float: left;">
+					Username:<br />
+					<input type="text" name="apiUsername" id="api_username" /><br />
+				</div>
+				<div style="float: left;">
+					Passcode:<br />
+					<input type="password" name="apiPasscode" id="api_passcode" />
+				</div>
+				<div style="clear: both;">
+					<input type="submit" value="Log In" />
+				</div>
+			</form>
+		</div>
+
+		Token: <input type="text" id="api_token" /><br />
+		<input type="button" value="Log In" onClick="socket.emit('auth.login', {
+			token: document.getElementById('api_token').value
+		});" />
+
+
+		<h3>Test</h3>
+		Echo: <input type="text" id="test_echo" /><br />
+		<input type="button" value="Echo" onClick="messageId++; socket.emit('test.echo', {
+			messageId: messageId.toString(),
+			message: document.getElementById('test_echo').value
+    });" />
+  </div>
+
+	<script>
+		var connectionStatus = document.getElementById('ConnectionStatus');
+		var data = document.getElementById('Data');
+		var errors = document.getElementById('Errors');
+		var token = document.getElementById('api_token');
+
+		var formatDate = function(date) {
+			date = new Date(date);
+			var mm = date.getMonth() + 1;
+  		var dd = date.getDate();
+			return [date.getFullYear(), mm < 10 ? '0'+ mm: mm, dd < 10 ? '0'+ dd : dd].join('-');
+		}
+
+		socket = io.connect(socketUri, { transports: ['websocket'] });
+
+		socket.on('disconnect', function() {
+			console.log('disconnected');
+		});
+
+		socket.on('connect', function (response) {
+			console.log('connected');
+			//for(var i = 1; i < 10000; i++) {
+				socket.emit('auth.register', {
+					id: i,
+					version: 'x1'
+				});
+			//}
+		});
+
+		var logs = [];
+		var Logs = document.getElementById('LogData');
+
+		socket.on('log', function (response) {
+			log(response);
+			if(logs.length > 10) logs.pop();
+			logs.unshift(response);
+
+			var output = "";
+			for(var i in logs) output += logs[i] + '<br />';
+			Logs.innerHTML = output;
+		});
+
+		socket.on('auth.register', function(response) {
+			//log(response);
+			if(response.status != 'success') return;
+			if(response.status) connectionStatus.innerHTML = response.message;
+
+			// Reconnect using token if connection is interrupted
+			if(response.status == 'success' && token.value != '') {
+				socket.emit('auth.login', {token: token.value});
+			}
+		});
+
+		socket.on('auth.login', function(response) {
+			log(response); if(response.status != 'success') return;
+			if(response.status && response.status == 'success') {
+				token.value = response.body.token.id;
+				connectionStatus.innerHTML = 'authenticated';
+			}
+		});
+
+		socket.on('test.echo', function(response) {
+			log(response);
+		});
+	</script>
+</body>
+</html>
