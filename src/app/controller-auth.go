@@ -6,10 +6,10 @@ import f "github.com/ambelovsky/gosf"
 type Auth struct{}
 
 // Register is generally the first endpoint requested by a connected client
-func (controller Auth) Register(request *f.Request, clientMessage *f.Message) {
+func (controller Auth) Register(request *f.Request) {
 	response := new(f.Message)
 	response.Success = true
-	response.Message = "client registered"
+	response.Text = "client registered"
 
-	request.Respond(clientMessage, response)
+	request.Respond(response)
 }

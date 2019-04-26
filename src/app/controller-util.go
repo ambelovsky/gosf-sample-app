@@ -6,10 +6,10 @@ import f "github.com/ambelovsky/gosf"
 type Util struct{}
 
 // Echo returns the passed message back to the client
-func (controller Util) Echo(request *f.Request, clientMessage *f.Message) {
+func (controller Util) Echo(request *f.Request) {
 	response := new(f.Message)
 	response.Success = true
-	response.Message = PluginSamplePlugin.Echo(clientMessage.Message)
+	response.Text = PluginSamplePlugin.Echo(request.Message.Text)
 
-	request.Respond(clientMessage, response)
+	request.Respond(response)
 }

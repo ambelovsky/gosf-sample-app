@@ -26,7 +26,7 @@
 		function log(response) {
 			console.log(response);
 			errors.innerHTML = 'No Errors';
-			if(response.success && response.success == false) errors.innerHTML = response.message;
+			if(response.success && response.success == false) errors.innerHTML = response.text;
 		}
 
 		function submitLogin() {
@@ -78,8 +78,8 @@
 		<h3>Test</h3>
 		Echo: <input type="text" id="test_echo" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
-			messageId: messageId.toString(),
-			message: document.getElementById('test_echo').value
+			id: messageId,
+			text: document.getElementById('test_echo').value
     });" />
   </div>
 
@@ -131,7 +131,7 @@
 		socket.on('auth.register', function(response) {
 			//log(response);
 			if(!response.success) return;
-			if(response.success) connectionStatus.innerHTML = response.message;
+			if(response.success) connectionStatus.innerHTML = response.text;
 
 			// Reconnect using token if connection is interrupted
 			if(response.success && token.value != '') {
