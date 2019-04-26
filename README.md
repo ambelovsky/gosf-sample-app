@@ -4,6 +4,12 @@ SocketIO API server in GoLang.
 
 **This example SocketIO API server was written using [GOSF](https://github.com/ambelovsky/gosf).  [Learn more about GOSF](https://github.com/ambelovsky/gosf), the GoLang SocketIO Framework**
 
+## Get It
+
+```sh
+go get -u "github.com/ambelovsky/gosf-sample-app"
+```
+
 ## File Structure
 
 ```txt
@@ -46,6 +52,13 @@ The app directory contains all of your application files.  This is where you'll 
  - plugins.go is responsible for loading plugin packages
  - routes.go connects socket.io endpoints to controllers
  - controller-*.go contain methods that are called by connected clients based on the endpoint configuration in routes.go
+
+```txt
+scaffolding.html
+```
+
+This scaffolding file is extremely helpful for testing your endpoints as you build them.  It is already preloaded with some sample
+fields including working calls to "auth.register" and "util.echo".
 
 ## Original Author
 
