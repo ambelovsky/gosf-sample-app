@@ -1,0 +1,7 @@
+{
+  "port": 9999,
+  "path": "/",
+  "secure": true,
+  "ssl-cert": "ssl.crt",
+  "ssl-key": "ssl.key"
+}

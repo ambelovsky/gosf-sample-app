@@ -10,6 +10,7 @@ func init() {
 
 	// Load Config Files
 	f.LoadConfig("server", "server.json")
+	//f.LoadConfig("server", "server-secure.json")
 }
 
 func main() {
