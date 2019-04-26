@@ -6,8 +6,18 @@ SocketIO API server in GoLang.
 
 ## Get It
 
+Fork it or download the site as a zip file.
+
+### Installation
+
 ```sh
-go get -u "github.com/ambelovsky/gosf-sample-app"
+. ./scripts/getdeps.sh
+```
+
+### Launch
+
+```sh
+. ./scripts/run.sh
 ```
 
 ## File Structure
