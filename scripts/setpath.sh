@@ -1,1 +1,2 @@
-export GOPATH=$GOPATH:$(pwd)
+export GOPATH=$HOME/go:$(pwd)
+echo $GOPATH
