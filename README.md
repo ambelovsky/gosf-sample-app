@@ -1,8 +1,8 @@
 # gosf-sample-app
-An example GOSF (GoLang SocketIO Framework) based API server.  It's a great starter application for building your own
+An example [GOSF](https://github.com/ambelovsky/gosf) (GoLang SocketIO Framework) based API server.  It's a great starter application for building your own
 SocketIO API server in GoLang.
 
-**This example SocketIO API server was written using GOSF.  [Learn more about GOSF](https://github.com/ambelovsky/gosf)**
+**This example SocketIO API server was written using [GOSF](https://github.com/ambelovsky/gosf).  [Learn more about GOSF](https://github.com/ambelovsky/gosf), the GoLang SocketIO Framework**
 
 ## File Structure
 
