@@ -2,7 +2,7 @@
 An example [GOSF](https://github.com/ambelovsky/gosf) (GoLang SocketIO Framework) based API server.  It's a great starter application for building your own
 SocketIO API server in GoLang.
 
-**This example SocketIO API server was written using [GOSF](https://github.com/ambelovsky/gosf).  [Learn more about GOSF](https://github.com/ambelovsky/gosf), the GoLang SocketIO Framework**
+**This example SocketIO API server was written using [GOSF](https://github.com/ambelovsky/gosf).  Learn more about [GOSF](https://github.com/ambelovsky/gosf), the GoLang SocketIO Framework at [github.com/ambelovsky/gosf](https://github.com/ambelovsky/gosf)**
 
 ## Get It
 
