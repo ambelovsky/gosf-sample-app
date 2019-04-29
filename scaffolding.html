@@ -74,13 +74,19 @@
 			token: document.getElementById('api_token').value
 		});" />
 
-
 		<h3>Test</h3>
 		Echo: <input type="text" id="test_echo" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
 			id: messageId,
 			text: document.getElementById('test_echo').value
-    });" />
+		});" />
+		<br /><br />
+		
+		Echo as Ack: <input type="text" id="test_echo_ack" /><br />
+		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
+			id: messageId,
+			text: document.getElementById('test_echo_ack').value
+    }, function(response) {console.log(response)});" />
   </div>
 
 	<script>
