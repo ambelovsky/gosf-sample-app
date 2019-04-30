@@ -7,7 +7,7 @@
 			font-size: 9pt;
 		}
 	</style>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
 	<script>
 		function $_GET(q,s) {
 			if(window.location.search == '') return undefined;
@@ -50,29 +50,6 @@
 			No Errors
 		</div>
 		<br />
-
-		<h3>Authenticate</h3>
-
-		<div style="clear: both; height: 80px;">
-			<form name="loginForm" onsubmit="return submitLogin()" method="post">
-				<div style="float: left;">
-					Username:<br />
-					<input type="text" name="apiUsername" id="api_username" /><br />
-				</div>
-				<div style="float: left;">
-					Passcode:<br />
-					<input type="password" name="apiPasscode" id="api_passcode" />
-				</div>
-				<div style="clear: both;">
-					<input type="submit" value="Log In" />
-				</div>
-			</form>
-		</div>
-
-		Token: <input type="text" id="api_token" /><br />
-		<input type="button" value="Log In" onClick="socket.emit('auth.login', {
-			token: document.getElementById('api_token').value
-		});" />
 
 		<h3>Test</h3>
 		Echo: <input type="text" id="test_echo" /><br />
