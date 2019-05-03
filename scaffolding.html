@@ -34,7 +34,6 @@
 	</script>
 </head>
 <body>
-
 	<div id="ControlPanel" style="float: left; width: 50%;">
 		<div id="ConnectionStatus">
 			Not Connected
@@ -49,16 +48,22 @@
 		Echo: <input type="text" id="test_echo" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
 			id: messageId,
-			text: document.getElementById('test_echo').value
+			text: document.getElementById('test_echo').value,
+			body: {
+				description: 'this is in scaffolding.html'
+			}
 		});" />
 		<br /><br />
 		
 		Echo as Ack: <input type="text" id="test_echo_ack" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
 			id: messageId,
-			text: document.getElementById('test_echo_ack').value
-    }, function(response) {console.log(response)});" />
-  </div>
+			text: document.getElementById('test_echo_ack').value,
+			body: {
+				description: 'this is in scaffolding.html'
+			}
+		}, function(response) {console.log(response)});" />
+	</div>
 
 	<script>
 		var connectionStatus = document.getElementById('ConnectionStatus');
