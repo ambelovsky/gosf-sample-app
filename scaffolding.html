@@ -81,15 +81,12 @@
 
 		socket.on('connect', function (response) {
 			console.log('connected');
-			var i = 1;
-			//for(i = 1; i < 10000; i++) {
-				socket.emit('auth.register', {
-					id: i,
-					data: {
-						version: 1
-					}
-				});
-			//}
+			socket.emit('auth.register', {
+				id: 1,
+				data: {
+					version: 1
+				}
+			});
 		});
 
 		var logs = [];
@@ -106,22 +103,8 @@
 		});
 
 		socket.on('auth.register', function(response) {
-			//log(response);
 			if(!response.success) return;
 			if(response.success) connectionStatus.innerHTML = response.text;
-
-			// Reconnect using token if connection is interrupted
-			if(response.success && token.value != '') {
-				socket.emit('auth.login', {token: token.value});
-			}
-		});
-
-		socket.on('auth.login', function(response) {
-			log(response); if(!response.success) return;
-			if(response.success) {
-				token.value = response.body.token.id;
-				connectionStatus.innerHTML = 'authenticated';
-			}
 		});
 
 		socket.on('util.echo', function(response) {
