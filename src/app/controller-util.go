@@ -8,25 +8,35 @@ import (
 // Util contains all util.* endpoint controllers
 type Util struct{}
 
+type EchoDetail struct {
+	OneThing     string `json:"oneThing,omitempty"`
+	AnotherThing struct {
+		MoreDetail string `json:"moreDetail,omitempty"`
+	} `json:"anotherThing,omitempty"`
+}
+
+type EchoRequestBody struct {
+	Description string `json:"description,omitempty"`
+}
+
 // Echo returns the passed message back to the client
 func (controller Util) Echo(client *f.Client, request *f.Request) *f.Message {
-	var description string
+	// Get request arguments and convert them to a predefined struct
+	requestBody := new(EchoRequestBody)
+	f.MapToStruct(request.Message.Body, requestBody)
 
-	// Argument Parsing
-	if val, ok := request.Message.Body["description"]; ok {
-		description = val.(string)
-	}
-
-	response := new(f.Message)
-	response.Success = true
-
-	// Using a function exposed by the gosf-sample-plugin
-	response.Text = samplePlugin.Echo(request.Message.Text)
+	// Use a plugin-exposed function and set the response text
+	responseText := samplePlugin.Echo(request.Message.Text)
 
 	// If a detailed description was entered, send it back to the client
-	if description != "" {
-		response.Text += " - " + description
+	if requestBody.Description != "" {
+		responseText += " - " + requestBody.Description
 	}
 
-	return response
+	echoDetail := &EchoDetail{
+		OneThing: "this is one thing",
+	}
+	echoDetail.AnotherThing.MoreDetail = "and another thing..."
+
+	return f.NewSuccessMessage(responseText, f.StructToMap(echoDetail))
 }

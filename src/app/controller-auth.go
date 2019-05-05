@@ -10,13 +10,9 @@ type Auth struct{}
 
 // Register is generally the first endpoint requested by a connected client
 func (controller Auth) Register(client *f.Client, request *f.Request) *f.Message {
-	response := new(f.Message)
-	response.Success = true
-	response.Text = "client registered"
+	response := f.NewSuccessMessage("client registered", nil)
 
-	adminMessage := new(f.Message)
-	adminMessage.Success = true
-	adminMessage.Text = "new client registered"
+	adminMessage := f.NewSuccessMessage("new client registered", nil)
 	gosf.Broadcast("admin", "admin.register", adminMessage)
 
 	return response
