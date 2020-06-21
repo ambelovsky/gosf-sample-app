@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/ambelovsky/gosf"
 	f "github.com/ambelovsky/gosf"
 )
 
@@ -13,7 +12,7 @@ func (controller Auth) Register(client *f.Client, request *f.Request) *f.Message
 	response := f.NewSuccessMessage("client registered", nil)
 
 	adminMessage := f.NewSuccessMessage("new client registered", nil)
-	gosf.Broadcast("admin", "admin.register", adminMessage)
+	f.Broadcast("admin", "admin.register", adminMessage)
 
 	return response
 }
