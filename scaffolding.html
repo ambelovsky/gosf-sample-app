@@ -68,6 +68,7 @@
 		Echo as Ack: <input type="text" id="test_echo_ack" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
 			id: messageId,
+			guid: '1111-1111-1111-1111-1111',
 			text: document.getElementById('test_echo_ack').value,
 			body: {
 				description: 'this is in scaffolding.html'
