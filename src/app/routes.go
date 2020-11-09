@@ -9,4 +9,5 @@ func RegisterRoutes() {
 
 	util := new(Util)
 	f.Listen("util.echo", util.Echo)
+	f.Listen("util.groupEcho", util.GroupEcho)
 }

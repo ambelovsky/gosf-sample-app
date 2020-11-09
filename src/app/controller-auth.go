@@ -14,5 +14,8 @@ func (controller Auth) Register(client *f.Client, request *f.Request) *f.Message
 	adminMessage := f.NewSuccessMessage("new client registered", nil)
 	f.Broadcast("admin", "admin.register", adminMessage)
 
+	// Test room join
+	client.Join("testRoom")
+
 	return response
 }

@@ -54,6 +54,16 @@
 			}
 		});" />
 		<br /><br />
+
+		Group Echo: <input type="text" id="test_echo" /><br />
+		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.groupEcho', {
+			id: messageId,
+			text: document.getElementById('test_echo').value,
+			body: {
+				description: 'this is a group message in scaffolding.html'
+			}
+		});" />
+		<br /><br />
 		
 		Echo as Ack: <input type="text" id="test_echo_ack" /><br />
 		<input type="button" value="Echo" onClick="messageId++; socket.emit('util.echo', {
@@ -113,6 +123,10 @@
 		});
 
 		socket.on('util.echo', function(response) {
+			log(response);
+		});
+
+		socket.on('util.groupEcho', function(response) {
 			log(response);
 		});
 	</script>
